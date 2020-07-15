@@ -1,3 +1,12 @@
+# How was working with MongoDB different from working with
+# PostgreSQL? What was easier, and what was harder?
+# I found working with mongo to be easyer as there are less "rules"
+# That being said my minamly educated opinion is that I dont like it as much
+# because of the loss rules about data
+# I feel if you dont enforce those rules it would be easy to lose data
+# not lose in the sence that its done, but in that you dont know where it is
+
+
 # pipenv install pymongo
 # pipenv install dnspython
 import sqlite3
