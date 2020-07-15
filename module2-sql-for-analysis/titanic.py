@@ -8,7 +8,7 @@ import psycopg2
 df = pd.read_csv (r'titanic.csv')
 conn = sqlite3.connect('titanic.sqlite3')
 c = conn.cursor()
-c.execute('CREATE TABLE titanic (survived, pclass, name, sex, age, siblingsspucesaboard, parentschildrenaboard, fare)')
+c.execute('CREATE TABLE IF NOT EXISTS titanic (Survived, pclass, Name, Sex, Age, Sib_Spouses_Count, Parent_Child_Count, Fare)')
 conn.commit()
 df.to_sql('titanic', conn, if_exists='replace', index = False)
 get_passengers = 'SELECT * FROM titanic;'
@@ -30,32 +30,46 @@ ele_curs = ele_conn.cursor()
 # sexes = "CREATE TYPE sex_types AS ENUM ('male', 'female');"
 # ele_curs.execute(classes)
 # ele_curs.execute(sexes)
-titanic = """
-CREATE TABLE titanic (
-  survived INT,
-  pclass pclass_types,
-  name VARCHAR(80),
-  sex sex_types,
-  age INT,
-  siblingsspucesaboard INT,
-  parentschildrenaboard INT,
-  
-   FLOAT
-);
-"""
+# titanic = """
+# CREATE TABLE titanic (
+#   survived INT,
+#   pclass pclass_types,
+#   name VARCHAR(80),
+#   sex sex_types,
+#   age INT,
+#   siblingsspucesaboard INT,
+#   parentschildrenaboard INT,
+#   fare FLOAT
+# );
+# """
 
-# ele_curs.execute(titanic)
-# ele_conn.commit()
+# dropping = """DROP TABLE IF EXISTS titanic, titanic;"""
+# ele_curs.execute(dropping)
+
+titanic = """ 
+CREATE TABLE IF NOT EXISTS titanic (
+  id SERIAL PRIMARY KEY,
+  Survived int,
+  Pclass int,
+  Name varchar(100),
+  Sex varchar(20),
+  Age int,
+  Sib_Spouses_Count int,
+  Parent_Child_Count int,
+  Fare float
+  );
+  """
+
+ele_curs.execute(titanic)
+ele_conn.commit()
 
 
 # Puting titanc data into the database
-get_passengers = 'SELECT * FROM titanic;'
-passengers = ele_curs.execute(get_passengers).fetchall()
 # print(passengers)
 for person in passengers:
   insert_passengers = """
     INSERT INTO titanic
-    (survived, pclass, name, sex, age, siblingsspucesaboard, parentschildrenaboard, fare)
-    VALUES """ + str(person[1:]) + ";"
+    (Survived, Pclass, Name, Sex, Age, Sib_Spouses_Count, Parent_Child_Count, Fare)
+    VALUES """ + str(person[0:]) + ";"
   ele_curs.execute(insert_passengers)
-  # print(person[1:], '\n')
+ele_conn.commit()  
