@@ -3,7 +3,7 @@ import psycopg2
 pip install psycopg2-binary
 dbname = 'iztjchnv'
 user = 'iztjchnv'
-password = 'e6TqKJ1gacDIRLZmhVW_0i1OBNik7JD5'
+password = ''
 host = 'ruby.db.elephantsql.com'
 
 pg_conn = psycopg2.connect(dbname=dbname, user=user,
