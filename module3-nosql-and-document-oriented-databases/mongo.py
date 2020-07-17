@@ -15,7 +15,7 @@ import pymongo
 
 
 # connecting to pymongo
-client = pymongo.MongoClient("mongodb+srv://TylerR:Xxj1Oj1zaqlw63GB@cluster0.0vck6.mongodb.net/<test>?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://TylerR:@cluster0.0vck6.mongodb.net/<test>?retryWrites=true&w=majority")
 db = client.test
 
 
